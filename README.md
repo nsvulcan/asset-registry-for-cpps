@@ -1,10 +1,10 @@
 [![Build Status](https://travis-ci.org/BEinCPPS/fitman-cam.svg?branch=master)](https://travis-ci.org/BEinCPPS/fitman-cam)
 
-# Fitman-cam project
+# Asset Registry for CPPS project
 
 ## Description of the component
 
-The **Asset Registry for CPPS (CAM)** Specific Enabler is a web-based, integrated platform for the management of Virtualized Asset. This Specific Enabler is targeted to the business user, who is not required to have IT expertise, nor an in-depth knowledge of ontology-related concepts and technologies.
+The **Asset Registry for CPPS (ARFC)** Specific Enabler is a web-based, integrated platform for the management of Virtualized Asset. This Specific Enabler is targeted to the business user, who is not required to have IT expertise, nor an in-depth knowledge of ontology-related concepts and technologies.
 
 Asset Registry for CPPS is based on several open source components, covering different functional areas; on top of these, it adds a rich layer of web-based, custom front-end functionalities which integrates low-level services into a unified, user-friendly experience.
 
@@ -15,7 +15,7 @@ This Asset Registry for CPPS release contains two modules, **Asset-Registry-for-
  
 ### Asset-Registry-for-CPPS
 
-Cam is a web application that exploits cam-service APIs. Cam allows user to create, manipulate and delete Assets using a web interface.
+ARFC is a web application that exploits cam-service APIs. ARFC allows user to create, manipulate and delete Assets using a web interface.
 
 ### Cam-Service
 
@@ -48,12 +48,12 @@ If creation is successful the user will be redirected to repository summary.
    |__ cam-service
 ```
 
-+ **B.** Install Cam: <br/>
++ **B.** Install Asset Registry for CPPS: <br/>
 
-1.	Open a terminal window and go to the root folder of CAM project .
+1.	Open a terminal window and go to the root folder of ARFC project .
 2.	Type the command: mvn package.
 3.	Copy the war in ```target/``` to ```<PATH_TO_TOMCAT>/webapps```.
-4.	Browse to ```<YOUR_HOST>:<YOUR_PORT>/CAM ``` to start using application.
+4.	Browse to ```<YOUR_HOST>:<YOUR_PORT>/Asset-Registry-for-CPPS ``` to start using application.
 
 + **C.** Install Cam-Service:<br/>
 ```bash
