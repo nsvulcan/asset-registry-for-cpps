@@ -4,7 +4,7 @@
 
 ## Description of the component
 
-The **Asset Registry for CPPS (ARFC)** is a web-based, integrated platform for the management of Virtualized Asset. This Specific Enabler is targeted to the business user, who is not required to have IT expertise, nor an in-depth knowledge of ontology-related concepts and technologies.
+The **Asset Registry for CPPS (ARFC)** is a web-based, integrated platform for the management of Virtualized Asset based on [fitman-cam](https://github.com/BEinCPPS/fitman-cam) project. This Specific Enabler is targeted to the business user, who is not required to have IT expertise, nor an in-depth knowledge of ontology-related concepts and technologies.
 
 Asset Registry for CPPS is based on several open source components, covering different functional areas; on top of these, it adds a rich layer of web-based, custom front-end functionalities which integrates low-level services into a unified, user-friendly experience.
 
@@ -107,7 +107,7 @@ in **Home** page, in **Applications** section, **Register** a new application wi
 | Callback URL  | http://localhost:8080/Asset-Registry-for-CPPS/oauth_callback.html |
 
 **2**. Click next to register data.<br/>
-**3**. In **Applications** section open CAM Application and in **OAuth2 Credentials** copy your **Client ID**.
+**3**. In **Applications** section open ARFC Application and in **OAuth2 Credentials** copy your **Client ID**.
 >(*) Fitman-cam local installation on Tomcat standard port.
 
 #### Fitman-cam OAuth2 configuration
