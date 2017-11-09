@@ -102,7 +102,7 @@ in **Home** page, in **Applications** section, **Register** a new application wi
 
 | Data        | Value                                           | 
 | ------------- |:---------------------------------------------:| 
-| Name		      | CAM			                | 
+| Name		      | Asset-Registry-for-CPPS			                | 
 | URL           | http://localhost:8080/Asset-Registry-for-CPPS                     | 
 | Callback URL  | http://localhost:8080/Asset-Registry-for-CPPS/oauth_callback.html |
 
