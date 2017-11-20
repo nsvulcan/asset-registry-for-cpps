@@ -4,7 +4,7 @@
 
 ## Description of the component
 
-The **Asset Registry for CPPS (ARFC)** is a web-based, integrated platform for the management of Virtualized Asset based on [fitman-cam](https://github.com/BEinCPPS/fitman-cam) project. This Specific Enabler is targeted to the business user, who is not required to have IT expertise, nor an in-depth knowledge of ontology-related concepts and technologies.
+The **Asset Registry for CPPS (AR4CPPS)** is a web-based, integrated platform for the management of Virtualized Asset based on [fitman-cam](https://github.com/BEinCPPS/fitman-cam) project. This Specific Enabler is targeted to the business user, who is not required to have IT expertise, nor an in-depth knowledge of ontology-related concepts and technologies.
 
 Asset Registry for CPPS is based on several open source components, covering different functional areas; on top of these, it adds a rich layer of web-based, custom front-end functionalities which integrates low-level services into a unified, user-friendly experience.
 
@@ -15,7 +15,7 @@ This Asset Registry for CPPS release contains two modules, **Asset-Registry-for-
  
 ### Asset-Registry-for-CPPS
 
-ARFC is a web application that exploits cam-service APIs. ARFC allows user to create, manipulate and delete Assets using a web interface.
+AR4CPPS is a web application that exploits cam-service APIs. AR4CPPS allows user to create, manipulate and delete Assets using a web interface.
 
 ### Cam-Service
 
@@ -50,7 +50,7 @@ If creation is successful the user will be redirected to repository summary.
 
 + **B.** Install Asset Registry for CPPS: <br/>
 
-1.	Open a terminal window and go to the root folder of ARFC project .
+1.	Open a terminal window and go to the root folder of AR4CPPS project .
 2.	Type the command: mvn package.
 3.	Copy the war in ```target/``` to ```<PATH_TO_TOMCAT>/webapps```.
 4.	Browse to ```<YOUR_HOST>:<YOUR_PORT>/Asset-Registry-for-CPPS ``` to start using application.
@@ -107,7 +107,7 @@ in **Home** page, in **Applications** section, **Register** a new application wi
 | Callback URL  | http://localhost:8080/Asset-Registry-for-CPPS/oauth_callback.html |
 
 **2**. Click next to register data.<br/>
-**3**. In **Applications** section open ARFC Application and in **OAuth2 Credentials** copy your **Client ID**.
+**3**. In **Applications** section open AR4CPPS Application and in **OAuth2 Credentials** copy your **Client ID**.
 >(*) Fitman-cam local installation on Tomcat standard port.
 
 #### Fitman-cam OAuth2 configuration
