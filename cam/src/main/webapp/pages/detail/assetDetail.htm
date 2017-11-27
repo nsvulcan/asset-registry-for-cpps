@@ -8,9 +8,10 @@
                         <a href="#/{{groupingType}}/{{groupingName}}">
                             <span aria-hidden="true">&larr;</span> Back</a>
                     </li>
-                </ul>
             </nav>
+
         </div>
+
         <div id="asset-detail" class="panel-body">
             <fieldset class="asset-detail-fieldset">
                 <div class="row-fluid" style="margin-bottom:20px;"><span class="label label-info label-header-detail">{{className}}</span>
@@ -32,19 +33,47 @@
                         <li role="presentation" class="{{isTabAttrsActive}}">
                             <a ng-click="changeTab('attributes')">Attributes</a>
                         </li>
-                        <li role="presentation" class="{{isTabRelsActive}}">
+                        <!-- <li role="presentation" class="{{isTabRelsActive}}">
                             <a ng-click="changeTab('relationships')">Relationships</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="panel-body">
+                    <div class="btn-group">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <button type="button" data-toggle="tooltip" title="Send to Orion Context Broker" ng-show="!isOCBEnabled"
+                                    class=""
+                                    ng-click="openConfirmOperationPanel()">
+                                <i class="fa fa-globe" data-toggle="modal" data-target="#newAttributeLabel"/> Link to Orion Context Broker
+                            </button>
+                            <button type="button" data-toggle="tooltip" title="Disconnect from Orion" ng-show="isOCBEnabled"
+                                    class=""
+                                    ng-click="openDisconnectFromOCB(selectedAsset.individualName)">
+                                <i class="fa fa-chain-broken cam-table-button"></i> Disconnect from {{selectedAsset.connectedToOrion}}
+                            </button>
+                            <button type="button" data-toggle="tooltip" ng-show="isOCBEnabled" title="Download assets for IDAS"
+                                    class="" ng-click="downloadAssetsForIDAS(selectedAsset)">
+                                <i class="fa fa-download cam-table-button"></i> Download IDAS configuration
+                            </button>
+                            <i class="fa fa-refresh fa-spin" data-toggle="tooltip" title="Refreshing from Orion"
+                                style="font-size:24px" ng-show="isOCBEnabled && isRefreshig"></i>
+                            <button type="button" data-toggle="tooltip" title="Refresh context from Orion"
+                                    ng-show="isOCBEnabled && !isRefreshig"
+                                    ng-click="refreshAssetFromOCB()" class="cam-btn-add-container" style="margin-right: 0px;">
+                                <i class="fa fa-refresh"></i> Refresh from OCB
+                            </button>
+                        </ul>
+                    </div>
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tab1default">
                             <div ng-include="'pages/detail/assetDetailAttributes.htm'" ng-show="isAttributes"></div>
                         </div>
-                        <div class="tab-pane fade in active" id="tab2default">
+                        <!-- <div class="tab-pane fade in active" id="tab2default">
                             <div ng-include="'pages/detail/assetDetailRelationships.htm'" ng-show="!isAttributes"></div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

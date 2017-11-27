@@ -1,9 +1,9 @@
 <div id="cam-asset-detail-btn-container" class="row-fluid" style="margin-top: 10px">
-    <button type="button" data-toggle="tooltip" title="New Attribute" class="cam-btn-add-container"
-            ng-click="openNewAttributePanel()" ng-disabled="isOCBEnabled">
-        <i class="fa fa-plus" data-toggle="modal" data-target="#newAttributeLabel"/> New Attribute
-    </button>
-    <button type="button" data-toggle="tooltip" title="Send to Orion Context Broker" ng-show="!isOCBEnabled"
+    <!-- <button type="button" data-toggle="tooltip" title="New Attribute" class="cam-btn-add-container" ng-click="openNewAttributePanel()"
+        ng-disabled="isOCBEnabled">
+        <i class="fa fa-plus" data-toggle="modal" data-target="#newAttributeLabel" /> New Attribute
+    </button> -->
+    <!-- <button type="button" data-toggle="tooltip" title="Send to Orion Context Broker" ng-show="!isOCBEnabled"
             class="cam-btn-add-container"
             ng-click="openConfirmOperationPanel()">
         <i class="fa fa-globe" data-toggle="modal" data-target="#newAttributeLabel"/> Link to Orion Context Broker
@@ -24,10 +24,12 @@
             ng-click="refreshAssetFromOCB()" class="cam-btn-add-container" style="margin-right: 0px;">
         <i class="fa fa-refresh"></i> Refresh from OCB
     </button>
+ -->
 </div>
+<br>
 <div id="asset-detail-table" class="cam-asset-detail-table-container">
-    <table asset-table="assetDetailOverrideOptions" aa-data="selectedAsset.attributes"
-           ao-column-defs="assetDetailColumnDefs" class="table table-striped cam-data-table">
+    <!-- <table ng-table-dynamic="selectedAsset.attributes" 
+        class="table table-condensed table-bordered table-hover cam-data-table">
         <thead>
         <tr>
             <th style="width: 50px"></th>
@@ -36,5 +38,17 @@
             <th style="width: 100px">Action</th>
         </tr>
         </thead>
-    </table>
+    </table> -->
+    <div class="btn-group">
+        <button ng-click="attributesTree.expand_all()" class="btn btn-default btn-sm">Expand All</button>
+        <button ng-click="attributesTree.collapse_all()" class="btn btn-default btn-sm">Collapse All</button>
+    </div>
+    <tree-grid 
+        tree-data="treeData" 
+        tree-control="attributesTree" 
+        col-defs="col_defs" 
+        expand-on="expanding_property" 
+        icon-leaf="fa fa-font">
+    </tree-grid>
+    <!-- <json-tree object="treeData" start-expanded="true" root-name="'Project'"></json-tree> -->
 </div>

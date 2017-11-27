@@ -15,7 +15,36 @@ camApp.controller('detailController',
             $scope.regexPattern = REGEX_PATTERN;
             $scope.invalidNameMsg = INVALID_NAME_MSG;
             $scope.nameIsMandatory = NAME_IS_MANDATORY_MSG;
-
+            
+            
+            $scope.attributesTree = tree = {};
+            $scope.expanding_property = "";
+            $scope.treeData = [];
+            $scope.col_defs = [
+                {  field: "name",
+                    displayName : "Property",
+                    sortable : true,
+                    filterable : true    
+                },
+                // {
+                //     field: "type",
+                //     displayName: "Type"
+                //   },
+                {
+                  field: "value",
+                  displayName: "Value",
+                  sortable : true,
+                  filterable : true    
+                },
+                {
+                  field: "action",
+                  displayName: "Action",
+                  cellTemplate: '<div ng-bind-html="row.branch[col.field]"></div>'
+                  //"<div class=\"inline-flex-item\"><button ng-disabled=\"isOCBEnabled\" class=\"cam-table-button\" ng-click=\"openRemovePropertyPanel('ngsi_12NC', 'attribute', 'QBox-1')\"> <i data-toggle=\"tooltip\" title=\"Delete attribute\" class=\"fa fa-trash cam-table-button\"></i> </button><button ng-disabled=\"isOCBEnabled\" class=\"cam-table-button\" ng-click=\"openAttributeDetailPanel('ngsi_12NC', 'attribute')\"> <i data-toggle=\"tooltip\" title=\"Open detail\" class=\"fa fa-pencil cam-table-button\"></i> </button>",
+                }
+              ];
+           
+          
             $scope.formatAssetDetailTableRow = function (data) {
                 var attribute = {};
                 attribute.name = data.normalizedName;
@@ -27,7 +56,7 @@ camApp.controller('detailController',
                 if (data.type == 'relationship')
                     elementType = 'relationship';
 
-                attribute.action = '<div class="inline-flex-item"><button ng-disabled="isOCBEnabled" class="cam-table-button" ng-click="openRemovePropertyPanel(\'' + attribute.name + '\', \'' + elementType + '\', \'' + individualName + '\')' + '"> <i data-toggle="tooltip" title="Delete ' + elementType + '" class="fa fa-trash cam-table-button"></i> </button>' + '<button ng-disabled="isOCBEnabled" class="cam-table-button" ng-click="openAttributeDetailPanel(\'' + data.normalizedName + '\', \'' + elementType + '\')' + '"> <i data-toggle="tooltip" title="Open detail" class="fa fa-pencil cam-table-button"></i> </button>';
+                attribute.action = '<div class="inline-flex-item"><button ng-disabled="isOCBEnabled" class="cam-table-button" ng-click="openRemovePropertyPanel(\'' + attribute.name + '\', \'' + elementType + '\', \'' + individualName + '\')' + '"> <i data-toggle="tooltip" style = "padding-left:40%;" title="Delete ' + elementType + '" class="fa fa-trash cam-table-button"></i> </button>' + '<button ng-disabled="isOCBEnabled" class="cam-table-button" ng-click="openAttributeDetailPanel(\'' + data.normalizedName + '\', \'' + elementType + '\')' + '"> <i data-toggle="tooltip" title="Open detail" class="fa fa-pencil cam-table-button"></i> </button>';
 
                 if (data.type == 'relationship')
                     attribute.type = '<i data-toggle="tooltip" title="relationship" class="fa fa-link" ><i/>';
@@ -38,6 +67,11 @@ camApp.controller('detailController',
             }
 
             $scope.getAssetDetail = function (name, type) {
+                var action ="<div class=\"inline-flex-item\"><button ng-disabled=\"isOCBEnabled\" class=\"cam-table-button\" ng-click=\"openRemovePropertyPanel('ngsi_12NC', 'attribute', 'QBox-1')\"> <i data-toggle=\"tooltip\" title=\"Delete attribute\" class=\"fa fa-trash cam-table-button\"></i> </button><button ng-disabled=\"isOCBEnabled\" class=\"cam-table-button\" ng-click=\"openAttributeDetailPanel('ngsi_12NC', 'attribute')\"> <i data-toggle=\"tooltip\" title=\"Open detail\" class=\"fa fa-pencil cam-table-button\"></i> </button>";
+                var actionRoot =  action + "<div class=\"inline-flex-item\"><button ng-disabled=\"isOCBEnabled\" class=\"cam-table-button\" ng-click=\"openNewAttributePanel()\"> <i data-toggle=\"tooltip\" title=\"Add new\" class=\"fa fa-plus cam-table-button\"></i> </button>";
+                entityManager.getUiData().success(function(data){
+                     $scope.treeData = transformToGridData(data, action, actionRoot);
+                 });
                 entityManager.getAssetDetail(name, type)
                     .success(function (data) {
                         var owned;
@@ -80,6 +114,7 @@ camApp.controller('detailController',
                                 $scope.isOCBEnabled = !isEmpty($scope.selectedAsset.connectedToOrion);
                                 $scope.domainsListNoDomain = Scopes.get('homeController').domainsListNoDomain;
                                 $scope.isDomainEnabled = $scope.domainsListNoDomain && $scope.domainsListNoDomain.length > 0;
+                                //$scope.treeData = $scope.selectedAsset.attributes;
                             })
                     })
                     .error(function (error) {
@@ -361,4 +396,11 @@ camApp.controller('detailController',
                         $scope.$apply()
                     })
             }
+
+
+            /** Tree-Grid blockchain implementation 20/11/2017 made by ascatox */
+            
+
+            
+             /** Tree-Grid blockchain implementation 20/11/2017 made by ascatox */
         }]);

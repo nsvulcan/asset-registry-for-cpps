@@ -1,0 +1,20 @@
+{
+	"id": "0001",
+	"type": "donut",
+	"name": "Cake",
+	"ppu": 0.55,
+	"batter": {
+		"group": "1001",
+		"type": "Regular",
+		"name": "esay",
+		"attribute": {
+			"sentiment": "good",
+			"type": "analytics"
+		}
+	},
+
+	"topping": {
+		"id": "5001",
+		"type": "None"
+	}
+}

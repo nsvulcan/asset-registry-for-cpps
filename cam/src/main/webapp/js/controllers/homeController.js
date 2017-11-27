@@ -463,5 +463,6 @@ camApp.controller('homeController', [
         $scope.openDetail = function (value, groupingType, groupingName) {
             $location.path('/detail/' + value + '/' + groupingType + '/' + groupingName);
             $scope.selectedAsset = $scope.assetMap[value];
+           
         }
     }]);

@@ -1,6 +1,6 @@
 // MODULE
 var camApp = angular.module('camApp', ['ngRoute', 'ngResource', 'angularTreeview', 'ngDialog', 'ngContextMenu',
-    'toastr', 'ngAnimate','ui.bootstrap', 'angular-loading-bar']);
+    'toastr', 'ngAnimate','ui.bootstrap', 'angular-loading-bar', 'treeGrid', 'ngSanitize']);
 
 camApp.config(['ngDialogProvider', function (ngDialogProvider) {
     ngDialogProvider.setDefaults({

@@ -335,7 +335,7 @@
                 <keystone.admin.password>fiware</keystone.admin.password> <!-- INSERT PASSWORD -->
                 <!-- KEYSTONE -->
                 <!-- END KEYROCK IDM SECTION -->
-                <tomcat.output.dir>/Users/ascatox/Documents/Servers/apache-tomcat-8.0.33/webapps</tomcat.output.dir>
+                <tomcat.output.dir>/Users/ascatox/Documents/Servers/apache-tomcat-8.0.33_2/webapps</tomcat.output.dir>
             </properties>
         </profile>
     </profiles>

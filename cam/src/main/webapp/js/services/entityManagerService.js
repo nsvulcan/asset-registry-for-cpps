@@ -265,6 +265,14 @@ camApp.factory('entityManager', ['$q', '$http', '${authentication.service}', fun
             return rejectNotLoggedCall();
     }
     // return our entire userFactory object
+
+
+    /**Blockchain */
+    entityManager.getUiData = function () {
+        //from json file!!!!
+        return $http.get('./resources/data-blockchain.json');
+    }
+
     return entityManager;
 
 }]);
