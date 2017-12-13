@@ -301,11 +301,11 @@
                 <!-- OAUTH2, KEYSTONE Supported at the moment -->
                 <keyrock.authentication.service>OAUTH2</keyrock.authentication.service>
                 <!-- HORIZON -->
-                <horizon.url>https://dw1.beincpps.eu</horizon.url>
+                <horizon.url>http://localhost:8000</horizon.url>
                 <!-- KEYSTONE -->
-                <keystone.url>https://dw1.beincpps.eu:8443</keystone.url>
+                <keystone.url>http://localhost:5000</keystone.url>
                 <keystone.admin.user>idm</keystone.admin.user> <!-- INSERT USER -->
-                <keystone.admin.password>Fiware2017</keystone.admin.password> <!-- INSERT PASSWORD -->
+                <keystone.admin.password>idm</keystone.admin.password> <!-- INSERT PASSWORD -->
                 <!-- KEYSTONE -->
                 <!-- END KEYROCK IDM SECTION -->
                 <tomcat.output.dir>${project.basedir}/target</tomcat.output.dir>
@@ -331,8 +331,8 @@
                 <horizon.url>http://161.27.159.76</horizon.url>
                 <!-- KEYSTONE -->
                 <keystone.url>http://161.27.159.76:8080</keystone.url>
-                <keystone.admin.user>idm</keystone.admin.user> <!-- INSERT USER -->
-                <keystone.admin.password>fiware</keystone.admin.password> <!-- INSERT PASSWORD -->
+                <keystone.admin.user></keystone.admin.user> <!-- INSERT USER -->
+                <keystone.admin.password></keystone.admin.password> <!-- INSERT PASSWORD -->
                 <!-- KEYSTONE -->
                 <!-- END KEYROCK IDM SECTION -->
                 <tomcat.output.dir>/Users/ascatox/Documents/Servers/apache-tomcat-8.0.33_2/webapps</tomcat.output.dir>
@@ -358,8 +358,8 @@
                 <horizon.url>http://dw1.beincpps.eu:8000</horizon.url>
                 <!-- KEYSTONE -->
                 <keystone.url>http://dw1.beincpps.eu:5000</keystone.url>
-                <keystone.admin.user>idm</keystone.admin.user> <!-- INSERT USER -->
-                <keystone.admin.password>Fiware2017</keystone.admin.password> <!-- INSERT PASSWORD -->
+                <keystone.admin.user></keystone.admin.user> <!-- INSERT USER -->
+                <keystone.admin.password></keystone.admin.password> <!-- INSERT PASSWORD -->
                 <!-- KEYSTONE -->
                 <!-- END KEYROCK IDM SECTION -->
                 <tomcat.output.dir>${project.basedir}/target</tomcat.output.dir>
