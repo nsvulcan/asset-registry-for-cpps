@@ -15,7 +15,7 @@
         <authentication.service>oAuth</authentication.service>
     </properties>
     <build>
-        <finalName>Asset-Registry-for-CPPS</finalName>
+        <finalName>ar4cpps</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -45,9 +45,9 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <horizon.url>http://localhost:8002</horizon.url>
+                <horizon.url>https://dw1.beincpps.eu</horizon.url>
                 <!-- OAUTH2 CLIENT ID-->
-                <client.id>ebfafab4484f4d728bed51a6373f008d</client.id>
+                <client.id>3df053bcd7184da48574e7236b882051</client.id>
                 <tomcat.output.dir>${project.basedir}/target</tomcat.output.dir>
             </properties>
         </profile>
@@ -57,7 +57,16 @@
                 <horizon.url>http://161.27.159.76</horizon.url>
                 <!-- OAUTH2 CLIENT ID-->
                 <client.id>6a636dc9ff1d4e4395ae01c60fb9d3b5</client.id>
-                <tomcat.output.dir>/Users/ascatox/Documents/Servers/apache-tomcat-8.0.33/webapps</tomcat.output.dir>
+                <tomcat.output.dir>/Users/ascatox/Documents/Servers/apache-tomcat-8.0.33_2/webapps</tomcat.output.dir>
+            </properties>
+        </profile>
+        <profile>
+            <id>beincpps</id>
+            <properties>
+                <horizon.url>https://dw1.beincpps.eu</horizon.url>
+                <!-- OAUTH2 CLIENT ID-->
+                <client.id>15a483077a804a518dfa6b220fb1b840</client.id>
+                <tomcat.output.dir>${project.basedir}/target</tomcat.output.dir>
             </properties>
         </profile>
     </profiles>

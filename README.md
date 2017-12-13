@@ -11,15 +11,15 @@ Asset Registry for CPPS is based on several open source components, covering dif
 Asset Registry for CPPS is delivered as a module that allows the user to manipulate ontologies adding classes and templates and create, manipulate and delete Assets.
 
 
-This Asset Registry for CPPS release contains two modules, **Asset-Registry-for-CPPS** and **Cam-Service**.
+This Asset Registry for CPPS release contains two modules, **Asset Registry** and **Asset Registry API**.
  
-### Asset-Registry-for-CPPS
+### Asset Registry
 
-AR4CPPS is a web application that exploits cam-service APIs. AR4CPPS allows user to create, manipulate and delete Assets using a web interface.
+Asset Registry is a web application that exploits cam-service APIs. AR4CPPS allows user to create, manipulate and delete Assets using a web interface.
 
-### Cam-Service
+### Asset Registry API
 
-Cam-Service component exposes its own public, proprietary REST-based web API. By means of API calls, the reference ontology, the asset repository and the service registry can be queried by external applications. The usual CRUD operations will be allowed on Class, Assets, Owners and Attributes.
+Asset Registry API component exposes its own public, proprietary REST-based web API. By means of API calls, the reference ontology, the asset repository and the service registry can be queried by external applications. The usual CRUD operations will be allowed on Class, Assets, Domains and Attributes.
 	
 ## Developer environment
 
@@ -53,9 +53,9 @@ If creation is successful the user will be redirected to repository summary.
 1.	Open a terminal window and go to the root folder of AR4CPPS project .
 2.	Type the command: mvn package.
 3.	Copy the war in ```target/``` to ```<PATH_TO_TOMCAT>/webapps```.
-4.	Browse to ```<YOUR_HOST>:<YOUR_PORT>/Asset-Registry-for-CPPS ``` to start using application.
+4.	Browse to ```<YOUR_HOST>:<YOUR_PORT>/ar4cpps ``` to start using application.
 
-+ **C.** Install Cam-Service:<br/>
++ **C.** Install Asset Registry API:<br/>
 ```bash
 $ cd cam-service
 $ mvn package -P prod
@@ -71,7 +71,7 @@ $ mvn package
 $ mvn verify 
 ```
 
-The default port in order to use CAMService with Sesame repo is 8080, feel free to change this parameter inside the file pom.xml.
+The default port in order to use Asset Registry for CPPS API with Sesame repo is 8080, feel free to change this parameter inside the file pom.xml.
 
 Change sesame repository properties with your sesame installation: 
 
@@ -81,10 +81,10 @@ sesame.repository (<EXAMPLE_REPO>)
 sesame.namespace
 ```
 
-Copy the CAMService.war into a Tomcat installation.
+Copy the ar4cppsAPI.war into a Tomcat installation.
 
 ```bash
-$ cp ./cam-service/target/CAMService.war ./apache-tomcat-8.0.33/webapps
+$ cp ./cam-service/target/ar4cppsAPI.war ./apache-tomcat-8.0.33/webapps
 ```
 
 ## Authentication
@@ -102,16 +102,16 @@ in **Home** page, in **Applications** section, **Register** a new application wi
 
 | Data        | Value                                           | 
 | ------------- |:---------------------------------------------:| 
-| Name		      | Asset-Registry-for-CPPS			                | 
-| URL           | http://localhost:8080/Asset-Registry-for-CPPS                     | 
-| Callback URL  | http://localhost:8080/Asset-Registry-for-CPPS/oauth_callback.html |
+| Name		    | Asset Registry for CPPS			                | 
+| URL           | http://localhost:8080/ar4cpps                     | 
+| Callback URL  | http://localhost:8080/ar4cpps/oauth_callback.html |
 
 **2**. Click next to register data.<br/>
 **3**. In **Applications** section open AR4CPPS Application and in **OAuth2 Credentials** copy your **Client ID**.
->(*) Fitman-cam local installation on Tomcat standard port.
+>(*) AR4CPPS local installation on Tomcat standard port.
 
-#### Fitman-cam OAuth2 configuration
-**1**. In **cam** folder edit the following properties in [pom.xml](https://github.com/BEinCPPS/fitman-cam/blob/master/cam/pom.xml):
+#### AR4CPPS OAuth2 configuration
+**1**. In **cam** folder edit the following properties in [pom.xml](https://github.com/BEinCPPS/asset-registry-for-cpps/blob/master/cam/pom.xml):
 
 ```bash
 <authentication.service>oAuth</authentication.service>
@@ -120,7 +120,7 @@ in **Home** page, in **Applications** section, **Register** a new application wi
 ```
 **2**. From the same folder launch the command `mvn package`
 
-**3**. In **cam-service** folder edit the following properties in [pom.xml](https://github.com/BEinCPPS/fitman-cam/blob/master/cam-service/pom.xml):
+**3**. In **cam-service** folder edit the following properties in [pom.xml](https://github.com/BEinCPPS/asset-registry-for-cpps/blob/master/cam-service/pom.xml):
  
 ```bash
 <keyrock.authentication.service>OAUTH2</keyrock.authentication.service>
@@ -133,9 +133,9 @@ in **Home** page, in **Applications** section, **Register** a new application wi
 
 **4**. From the same folder launch the command `mvn package -P prod`
 
-**5**. Copy the `Asset-Registry-for-CPPS war` and `CAMService.war` in your Tomcat webapps installation
+**5**. Copy the `ar4cpps.war` and `ar4cppsAPI.war` in your Tomcat webapps installation
 ```bash
-$ cp ./cam-service/target/CAMService.war ./apache-tomcat-8.0.33/webapps && ./cam/target/Asset-Registry-for-CPPS.war ./apache-tomcat-8.0.33/webapps
+$ cp ./cam-service/target/ar4cppsAPI.war ./apache-tomcat-8.0.33/webapps && ./cam/target/ar4cpps.war ./apache-tomcat-8.0.33/webapps
 ```
 
 
