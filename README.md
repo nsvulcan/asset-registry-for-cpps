@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/BEinCPPS/asset-registry-for-cpps.svg?branch=master)](https://travis-ci.org/BEinCPPS/fitman-cam)
+[![Build Status](https://travis-ci.org/BEinCPPS/asset-registry-for-cpps.svg?branch=master)](https://travis-ci.org/BEinCPPS/asset-registry-for-cpps)
 
 # Asset Registry for CPPS project
 
