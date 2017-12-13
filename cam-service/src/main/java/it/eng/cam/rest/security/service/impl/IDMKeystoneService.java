@@ -3,6 +3,7 @@ package it.eng.cam.rest.security.service.impl;
 
 import it.eng.cam.rest.security.authentication.CAMPrincipal;
 import it.eng.cam.rest.security.authentication.credentials.Credentials;
+import it.eng.cam.rest.security.authentication.credentials.admin.LoginAdminTask;
 import it.eng.cam.rest.security.project.Project;
 import it.eng.cam.rest.security.project.ProjectContainerJSON;
 import it.eng.cam.rest.security.project.ProjectsCacheManager;
@@ -54,6 +55,14 @@ public class IDMKeystoneService implements IDMService {
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         invocationBuilder.header(Constants.X_AUTH_TOKEN, Constants.ADMIN_TOKEN);
         Response response = invocationBuilder.get();
+        if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+            if (response.getStatus() == Response.Status.UNAUTHORIZED.getStatusCode()
+                    || response.getStatus() == Response.Status.FORBIDDEN.getStatusCode()) {
+                Timer timer = new Timer();
+                timer.schedule(new LoginAdminTask(), new Date()); //now!!!
+            }
+            return new ArrayList<>(ProjectsCacheManager.getInstance().getCache().values());
+        }
         ProjectContainerJSON projectContainerJSON = response.readEntity(ProjectContainerJSON.class);
         List<Project> projects = projectContainerJSON.getProjects();
         if ((projects == null || projects.isEmpty()) && !ProjectsCacheManager.getInstance().getCache().isEmpty())
@@ -77,7 +86,8 @@ public class IDMKeystoneService implements IDMService {
     }
 
     private void buildProjectsCache(List<Project> projects) {
-        if (projects == null || projects.isEmpty()) return;
+        if (projects == null || projects.isEmpty())
+            return;
         for (Project project :
                 projects) {
             ProjectsCacheManager.getInstance().getCache().put(project.getId(), project);
@@ -220,4 +230,6 @@ public class IDMKeystoneService implements IDMService {
         }
         return principal;
     }
+
+
 }

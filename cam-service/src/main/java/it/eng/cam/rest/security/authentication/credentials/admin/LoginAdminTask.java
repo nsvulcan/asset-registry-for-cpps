@@ -25,7 +25,7 @@ public class LoginAdminTask extends TimerTask {
         try {
             System.setProperty(ClientBuilder.JAXRS_DEFAULT_CLIENT_BUILDER_PROPERTY, "org.glassfish.jersey.client.JerseyClientBuilder");
             UserLoginJSON user = new UserLoginJSON();
-            if(StringUtils.isBlank(username) || StringUtils.isBlank(password))
+            if (StringUtils.isBlank(username) || StringUtils.isBlank(password))
                 throw new IllegalArgumentException("Configure user and password of ADMIN into properties file.");
             user.setUsername(username);
             user.setPassword(password);
@@ -33,8 +33,13 @@ public class LoginAdminTask extends TimerTask {
             Response response = idmKeystoneService.getADMINToken(user);
             final List<Object> objects = response.getHeaders().get(Constants.X_SUBJECT_TOKEN);
             String adminToken = objects.get(0).toString();
-            if (adminToken == null || adminToken.isEmpty())
-                throw new IllegalStateException(FATAL_ADMIN_TOKEN_IS_NOT_SET);
+            if (adminToken == null || adminToken.isEmpty()) {
+                logger.error(FATAL_ADMIN_TOKEN_IS_NOT_SET);
+                Constants.ADMIN_TOKEN = "ADMIN"; //not so good :-(
+                Timer timer = new Timer();
+                timer.schedule(new LoginAdminTask(), addMinutes(new Date(), 2));
+                return;
+            }
             Constants.ADMIN_TOKEN = adminToken;
             Date date = extractExpiresDate(response);
             Timer timer = new Timer();

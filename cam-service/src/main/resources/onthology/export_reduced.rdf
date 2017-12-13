@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns="http://www.owl-ontologies.com/Ontology1343136486.owl#"
+	xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:msee="http://www.msee-ip.eu/ontology/system#"
+	xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+	xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#createdOn">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#instanceOf">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#ownedBy">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+	<rdfs:range rdf:resource="http://cam.eng.it/ontology/system#ResourceOwner"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#hasServicePath">
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#localhost">
+	<hasServicePath xmlns="http://cam.eng.it/ontology/system#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">/testSubService</hasServicePath>
+	<hasService xmlns="http://cam.eng.it/ontology/system#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">testService</hasService>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#hasService">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#hasServicePath">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#localhost">
+	<rdf:type rdf:resource="http://cam.eng.it/ontology/system#ResourceOrionConfig"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#hasURL">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#localhost">
+	<hasURL xmlns="http://cam.eng.it/ontology/system#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://localhost:1026</hasURL>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QATool">
+	<rdfs:subClassOf rdf:resource="http://cam.eng.it/ontology/beincppsns#QAAsset"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QAMobileStation">
+	<rdfs:subClassOf rdf:resource="http://cam.eng.it/ontology/beincppsns#QAWorkStation"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QAWorkStation">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#LogisticsAsset">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QAWorkStation">
+	<rdfs:subClassOf rdf:resource="http://cam.eng.it/ontology/beincppsns#QATool"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QAMobileStation">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QAAsset">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#LogisticsAsset">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QATool">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#DevelopmentAsset">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ProductionAsset">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QAAsset">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ProductionAsset">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#SecurityAsset">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<createdOn xmlns="http://cam.eng.it/ontology/system#" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-06-27T15:46:55.445+02:00</createdOn>
+	<ownedBy xmlns="http://cam.eng.it/ontology/system#" rdf:resource="idm://v3/projects/fc14cb8ce0f64f12925fa14461d6c3e7#Whirlpool"/>
+	<rdf:type rdf:resource="http://cam.eng.it/ontology/beincppsns#QAMobileStation"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+	<description xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mobile testing station for ZHQ</description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#description">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<serial_n xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A62603</serial_n>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#serial_n">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_state xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_state>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_state">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure1 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure1>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure1">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure2 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure2>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure2">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure3 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure3>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure3">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure4 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure4>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure4">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure5 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure5>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure5">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure6 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure6>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure6">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure7 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure7>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure7">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure8 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure8>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure8">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure9 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure9>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure9">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure10 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure10>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure10">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure11 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure11>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure11">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure12 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure12>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure12">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure13 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure13>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure13">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_measure14 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure14>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_measure14">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_12NC xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_12NC>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_12NC">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_serialNumber xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_serialNumber>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_serialNumber">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<ngsi_ipAddress xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_ipAddress>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#ngsi_ipAddress">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-1">
+	<syncTo xmlns="http://cam.eng.it/ontology/system#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">localhost</syncTo>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/system#syncTo">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QBox-2">
+	<description xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mobile testing station for ZHQ</description>
+	<ngsi_12NC xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_12NC>
+	<ngsi_ipAddress xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_ipAddress>
+	<ngsi_measure1 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure1>
+	<ngsi_measure10 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure10>
+	<ngsi_measure11 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure11>
+	<ngsi_measure12 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure12>
+	<ngsi_measure13 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure13>
+	<ngsi_measure14 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure14>
+	<ngsi_measure2 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure2>
+	<ngsi_measure3 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure3>
+	<ngsi_measure4 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure4>
+	<ngsi_measure5 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure5>
+	<ngsi_measure6 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure6>
+	<ngsi_measure7 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure7>
+	<ngsi_measure8 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure8>
+	<ngsi_measure9 xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_measure9>
+	<ngsi_serialNumber xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_serialNumber>
+	<ngsi_state xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></ngsi_state>
+	<serial_n xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A62603</serial_n>
+	<createdOn xmlns="http://cam.eng.it/ontology/system#" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-06-27T15:56:50.269+02:00</createdOn>
+	<instanceOf xmlns="http://cam.eng.it/ontology/system#" rdf:resource="http://cam.eng.it/ontology/beincppsns#QBox-1"/>
+	<ownedBy xmlns="http://cam.eng.it/ontology/system#" rdf:resource="idm://v3/projects/fc14cb8ce0f64f12925fa14461d6c3e7#Whirlpool"/>
+	<rdf:type rdf:resource="http://cam.eng.it/ontology/beincppsns#QAMobileStation"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QADevice">
+	<createdOn xmlns="http://cam.eng.it/ontology/system#" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-12-06T12:29:39.903+01:00</createdOn>
+	<rdf:type rdf:resource="http://cam.eng.it/ontology/beincppsns#QAMobileStation"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#SecurityAssetIndoor">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+	<rdfs:subClassOf rdf:resource="http://cam.eng.it/ontology/beincppsns#SecurityAsset"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#SecurityAssetOutdoor">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+	<rdfs:subClassOf rdf:resource="http://cam.eng.it/ontology/beincppsns#SecurityAsset"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#Capacity">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QADevice">
+	<Capacity xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">64</Capacity>
+	<RAM xmlns="http://cam.eng.it/ontology/beincppsns#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4</RAM>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#RAM">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#LocationSite">
+	<createdOn xmlns="http://cam.eng.it/ontology/system#" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-12-06T12:48:59.902+01:00</createdOn>
+	<rdf:type rdf:resource="http://cam.eng.it/ontology/beincppsns#LogisticsAsset"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://cam.eng.it/ontology/beincppsns#QADevice">
+	<syncTo xmlns="http://cam.eng.it/ontology/system#" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">localhost</syncTo>
+</rdf:Description>
+
+</rdf:RDF>
