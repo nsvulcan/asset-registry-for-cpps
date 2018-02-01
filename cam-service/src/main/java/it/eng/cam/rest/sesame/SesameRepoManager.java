@@ -143,6 +143,6 @@ public class SesameRepoManager {
     }
 
     public static String getNamespace() {
-        return BeInCpps.NS + "/ontology/" + SESAME_REPO_NAMESPACE + "#";
+        return BeInCpps.NS + "/ontologies/" + SESAME_REPO_NAMESPACE + "#";
     }
 }

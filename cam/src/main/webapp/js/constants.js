@@ -1,7 +1,7 @@
 //var BACK_END_URL_CONST = PROTOCOL + window.location.hostname + ":8080/CAMService";
 var PROTOCOL = 'http://';
-var BACK_END_URL_CONST = PROTOCOL + window.location.host + "/ar4cppsAPI";
-var CAM_URL = PROTOCOL + window.location.host + '/ar4cpps';
+var BACK_END_URL_CONST = PROTOCOL + window.location.host + "/Asset-Registry-Api-for-A4BLUE";
+var CAM_URL = PROTOCOL + window.location.host + '/Asset-Registry-for-A4BLUE';
 
 var INVALID_NAME_MSG = 'Please insert valid name"'
 var NAME_IS_MANDATORY_MSG = 'Name is mandatory';

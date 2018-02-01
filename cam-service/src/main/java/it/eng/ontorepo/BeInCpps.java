@@ -7,7 +7,7 @@ public class BeInCpps {
 
     // TODO Ontology
     public static final String NS = Constants.ONTOLOGY_NAMESPACE_DEFAULT;
-    public static final String SYSTEM_NS = NS + "/ontology/system#";
+    public static final String SYSTEM_NS = NS + "/ontologies/system#";
     public static final String OWNER_CLASS = SYSTEM_NS + "ResourceOwner";
     public static final String USER_CLASS = SYSTEM_NS + "ResourceUser";
     public static final String ORION_CONFIG_CLASS = SYSTEM_NS + "ResourceOrionConfig";

@@ -15,7 +15,7 @@
         <authentication.service>oAuth</authentication.service>
     </properties>
     <build>
-        <finalName>ar4cpps</finalName>
+        <finalName>Asset-Registry-for-A4BLUE</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -45,9 +45,9 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <horizon.url>http://localhost:8000</horizon.url>
+                <horizon.url>http://192.168.90.120:8000</horizon.url>
                 <!-- OAUTH2 CLIENT ID-->
-                <client.id>3df053bcd7184da48574e7236b882051</client.id>
+                <client.id>f826418d98634f77b1288a6650b30e9c</client.id>
                 <tomcat.output.dir>${project.basedir}/target</tomcat.output.dir>
             </properties>
         </profile>
