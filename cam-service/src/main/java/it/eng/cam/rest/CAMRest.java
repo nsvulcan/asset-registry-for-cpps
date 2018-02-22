@@ -67,7 +67,7 @@ public class CAMRest {
         RepositoryDAO repoInstance = null;
         try {
             repoInstance = SesameRepoManager.getRepoInstance(getClass());
-            return CAMRestImpl.getClasses(repoInstance, true, flat);
+            return CAMRestImpl.getClasses(repoInstance, /*true*/false, flat);
         } catch (Exception e) {
             logger.error(e);
             throw new CAMServiceWebException(e.getMessage());
