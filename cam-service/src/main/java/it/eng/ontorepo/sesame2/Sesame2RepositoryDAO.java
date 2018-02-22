@@ -530,7 +530,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 			String clazz = curr.getValue("name").stringValue();
 			
 			if(!map.containsKey(clazz)) {
-	        	System.out.println(clazz);
+	        	//System.out.println(clazz);
 	        	map.put(clazz, new ArrayList<BindingSet>());
 	        }
 	        
@@ -558,10 +558,6 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
             // cn.getNamespace().equalsIgnoreCase(getImplicitNamespace()))
             addToSiblings(cn, siblingsMap);
         }
-        
-        System.out.println("siblingsMap\n\n" + siblingsMap);
-        
-        //System.out.println("alla fine ->\t" + siblingsMap.keySet());
         
         // the root of the hierarchical tree is always the owl:Thing node
         ClassItem root = new ClassItem(getImplicitNamespace(), OWL.THING.stringValue(), null);
