@@ -16,8 +16,6 @@ import it.eng.ontorepo.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.eclipse.rdf4j.IsolationLevels;
-import org.eclipse.rdf4j.repository.RepositoryConnection;
 
 import java.net.MalformedURLException;
 import java.text.ParseException;
