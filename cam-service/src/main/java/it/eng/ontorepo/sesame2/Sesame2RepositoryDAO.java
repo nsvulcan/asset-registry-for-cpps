@@ -3,6 +3,7 @@ package it.eng.ontorepo.sesame2;
 import it.eng.cam.rest.Constants;
 import it.eng.cam.rest.sesame.SesameRepoManager;
 import it.eng.ontorepo.*;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jetty.io.RuntimeIOException;
 import org.eclipse.rdf4j.IsolationLevels;
@@ -35,6 +36,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Implementation of {@link RepositoryDAO} for accessing the Reference Ontology
@@ -68,11 +70,14 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
     private static final String NAMESPACE = BeInCpps.NS;
     private static final String FILTER_BY_NS_CONTENT = " STRSTARTS(STR(?name), \"" + NAMESPACE + "\") ";
     private static final String FILTER_BY_NS = " FILTER(" + FILTER_BY_NS_CONTENT + "). ";
+    
+    private static final String BIND = " BIND((IF(isBlank(?ssuperclass), owl:Thing, ?ssuperclass)) as ?superclass) ";
     // queries
 
     private static final String QUERY_CLASSES = "SELECT DISTINCT ?name ?superclass " + "WHERE { ?name rdf:type <"
-            + OWL.CLASS + ">; " + "rdfs:subClassOf ?superclass." +
-            FILTER_BY_NS +
+            + OWL.CLASS + ">; " + "rdfs:subClassOf ?ssuperclass." +
+    		BIND +
+            //FILTER_BY_NS +
             " }";
 
 
@@ -509,24 +514,60 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     }
 
+    private static Predicate<? super BindingSet> isSonOfThing() {
+        return p -> p.getValue("superclass").stringValue().equals(OWL.THING.stringValue());
+    }
+    
     @Override
     public ClassItem getClassHierarchy() throws RuntimeException {
-        Map<String, List<ClassItem>> siblingsMap = new HashMap<String, List<ClassItem>>();
         List<BindingSet> results = executeSelect(QUERY_CLASSES);
-        for (BindingSet result : results) {
-            ClassItem cn = getClassItem(result);
-            // update temporary map: keep all sibling nodes together, indexed by
+        
+        Map<String, List<BindingSet>> map = new LinkedHashMap<String, List<BindingSet>>();
+        
+        for (Iterator<BindingSet> iterator = results.iterator(); iterator.hasNext();) {
+			BindingSet curr = (BindingSet) iterator.next();
+			
+			String clazz = curr.getValue("name").stringValue();
+			
+			if(!map.containsKey(clazz)) {
+	        	System.out.println(clazz);
+	        	map.put(clazz, new ArrayList<BindingSet>());
+	        }
+	        
+	        map.get(clazz).add(curr);
+	    }
+        
+        List<BindingSet> resultsCompressed = new ArrayList<BindingSet>();
+        
+        Map<String, List<ClassItem>> siblingsMap = new HashMap<String, List<ClassItem>>();
+
+        for (List<BindingSet> bindingSetList : map.values()) {
+			
+        	if(bindingSetList.size() > 1) {
+				bindingSetList.removeIf(isSonOfThing());
+			}
+			resultsCompressed.addAll(bindingSetList);
+		}
+                
+        for (BindingSet result : resultsCompressed) {
+        	ClassItem cn = getClassItem(result);
+        	// update temporary map: keep all sibling nodes together, indexed by
             // their superclass name
             // if(cn.getNamespace() ==null ||
             // cn.getNamespace().trim().equals("") ||
             // cn.getNamespace().equalsIgnoreCase(getImplicitNamespace()))
             addToSiblings(cn, siblingsMap);
         }
-
+        
+        System.out.println("siblingsMap\n\n" + siblingsMap);
+        
+        //System.out.println("alla fine ->\t" + siblingsMap.keySet());
+        
         // the root of the hierarchical tree is always the owl:Thing node
         ClassItem root = new ClassItem(getImplicitNamespace(), OWL.THING.stringValue(), null);
         // build the tree using the temporary map of siblings and recursion
         setChildren(root, siblingsMap);
+        
         return root;
     }
 
@@ -1304,12 +1345,17 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
     private ClassItem getClassItem(BindingSet s) {
         String clazz = s.getValue("name").stringValue();
         Value v = s.getValue("superclass");
+//        String sclazz = null != v && !v.stringValue().startsWith("node") ? 
+//        		v.stringValue() : OWL.THING.stringValue();
+        
         String sclazz = null != v ? v.stringValue() : OWL.THING.stringValue();
+        
         // return new ClassItem(getImplicitNamespace(), clazz, sclazz);
-        if (clazz.contains("#"))
+        if (clazz.contains("#")) {
             return new ClassItem(clazz.substring(0, clazz.indexOf("#") + 1), clazz, sclazz);
-        else
-            return new ClassItem(getImplicitNamespace(), clazz, sclazz);
+        } else {
+        	return new ClassItem(getImplicitNamespace(), clazz, sclazz);
+        }
     }
 
     /**
