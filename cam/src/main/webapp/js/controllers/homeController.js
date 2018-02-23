@@ -405,13 +405,23 @@ camApp.controller('homeController', [
                 return [];
             $scope.assetMap = {}
             for (var i = 0; i < data.length; i++) {
-                var asset = angular.copy(data[i]);
+            	var asset = angular.copy(data[i]);
                 $scope.assetMap[asset.individualName] = asset;
                 var elementType = 'asset';
                 var groupingType = currentNode.getCurrentNodeType();
                 var groupingName;
-                if (groupingType === GROUPING_CLASS_TYPE)
-                    groupingName = data[i].className;
+                if (groupingType === GROUPING_CLASS_TYPE) {
+                	groupingName = data[i].className;
+                	/*start giaisg*/
+                	/* added to manage class with namespaces */
+                	if(groupingName.indexOf('#')>0) {
+                		groupingName = 
+                			groupingName.substr(
+                					(groupingName.indexOf('#')+1), 
+                					groupingName.length);
+                	}
+                	/*end giaisg*/
+                }
                 else if (groupingType === GROUPING_DOMAIN_TYPE)
                     groupingName = data[i].domain;
                 data[i].action = (function () {
