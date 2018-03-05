@@ -302,9 +302,9 @@ public class CAMRest {
             repoInstance = SesameRepoManager.getRepoInstance(getClass());
             List<PropertyValueItem> individualAttributes = CAMRestImpl.getIndividualAttributes(repoInstance, assetName);
             return individualAttributes.stream()
-                    .filter(item -> !item.getNormalizedValue().equals(OWL.OBJECTPROPERTY.stringValue())
+                    /*.filter(item -> !item.getNormalizedValue().equals(OWL.OBJECTPROPERTY.stringValue())
                             && !item.getNormalizedName().contains("system")
-                    )
+                    )*/
                     .collect(Collectors.toList());
         } catch (Exception e) {
             logger.error(e);
