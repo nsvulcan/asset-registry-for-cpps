@@ -2,12 +2,28 @@ package it.eng.ontorepo.sesame2;
 
 import it.eng.cam.rest.Constants;
 import it.eng.cam.rest.sesame.SesameRepoManager;
-import it.eng.ontorepo.*;
+import it.eng.ontorepo.BeInCpps;
+import it.eng.ontorepo.ClassItem;
+import it.eng.ontorepo.IndividualItem;
+import it.eng.ontorepo.OrionConfig;
+import it.eng.ontorepo.PropertyDeclarationItem;
+import it.eng.ontorepo.PropertyValueItem;
+import it.eng.ontorepo.RepositoryDAO;
+import it.eng.ontorepo.Util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.eclipse.jetty.io.RuntimeIOException;
 import org.eclipse.rdf4j.IsolationLevels;
-import org.eclipse.rdf4j.model.*;
+import org.eclipse.rdf4j.model.Literal;
+import org.eclipse.rdf4j.model.Namespace;
+import org.eclipse.rdf4j.model.Resource;
+import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.model.URI;
+import org.eclipse.rdf4j.model.Value;
+import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.RDFS;
@@ -63,8 +79,11 @@ import java.util.function.Predicate;
  *
  * @author Mauro Isaja mauro.isaja@eng.it
  */
+@SuppressWarnings("deprecation")
 public class Sesame2RepositoryDAO implements RepositoryDAO {
-
+	
+	private static final Logger logger = LogManager.getLogger(Sesame2RepositoryDAO.class.getName());
+	
     private static final String VARTAG = "???"; // tag to be replaced in queries
     private static final String VARTAG2 = "###"; // tag to be replaced in
     private static final String NAMESPACE = BeInCpps.NS;
@@ -188,13 +207,13 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
             + "FILTER (regex( str(?domain ), \"^" + VARTAG2 + "\")" +
             ")}";
 
-    private static final String QUERY_SUB_CLASSES_OF = "SELECT DISTINCT ?name ?superclass " +
+    /*private static final String QUERY_SUB_CLASSES_OF = "SELECT DISTINCT ?name ?superclass " +
             "WHERE { ?name rdf:type <"
             + OWL.CLASS + ">; " + "rdfs:subClassOf* ?superclass. " +
             "FILTER(?superclass = <" + VARTAG + ">" +
             " && " + FILTER_BY_NS_CONTENT +
             "). " +
-            "}";
+            "}";*/
 
     private static final String QUERY_INDIVIDUALS_BY_SUB_CLASSES = "SELECT DISTINCT ?name ?class WHERE "
             + "{ "
@@ -217,7 +236,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
     // Modified by @ascatox 2016-04-26 to use MemoryStore in Unit Test
     private AbstractRepository repo;
     private final ValueFactory vf;
-    private final URI ni;
+	private final URI ni;
     private final String ns;
     private boolean inTransaction;
     private RepositoryConnection connection;
@@ -298,8 +317,11 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
      * @throws IllegalStateException if no namespace argument was provided, and the Reference
      *                               Ontology declares no default namespace
      */
-    public Sesame2RepositoryDAO(String server, String repository, String namespace)
+	public Sesame2RepositoryDAO(String server, String repository, String namespace)
             throws RuntimeException, IllegalStateException {
+		
+		logger.setLevel(Level.ALL);
+		
         if (null == server || server.isEmpty()) {
             throw new IllegalArgumentException("Server URL is mandatory");
         }
@@ -370,7 +392,10 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
      * @throws IllegalStateException if no namespace argument was provided, and the Reference
      *                               Ontology declares no default namespace
      */
-    public Sesame2RepositoryDAO(File dataDir, String namespace) throws RuntimeException, IllegalStateException {
+	public Sesame2RepositoryDAO(File dataDir, String namespace) throws RuntimeException, IllegalStateException {
+		
+		logger.setLevel(Level.ALL);
+		
         if (null != namespace && !namespace.endsWith(Util.PATH_TERM)) {
             throw new IllegalArgumentException("Namespace must end with " + Util.PATH_TERM);
         }
@@ -520,6 +545,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
     
     @Override
     public ClassItem getClassHierarchy() throws RuntimeException {
+    	logger.info("Start getClassHierarchy()");
         List<BindingSet> results = executeSelect(QUERY_CLASSES);
         
         Map<String, List<BindingSet>> map = new LinkedHashMap<String, List<BindingSet>>();
@@ -569,21 +595,25 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     @Override
     public List<PropertyDeclarationItem> getObjectProperties() throws RuntimeException {
+    	logger.info("Start getObjectProperties()");
         return getPropertyDeclarations(false, null);
     }
 
     @Override
     public List<PropertyDeclarationItem> getDataProperties() throws RuntimeException {
+    	logger.info("Start getDataProperties()");
         return getPropertyDeclarations(true, null);
     }
 
     @Override
     public List<IndividualItem> getIndividuals() throws RuntimeException {
+    	logger.info("Start getIndividuals()");
         return doGetIndividuals(QUERY_INDIVIDUALS, null);
     }
 
     @Override
     public List<IndividualItem> getIndividualsNoDomain() throws RuntimeException {
+    	logger.info("Start getIndividualsNoDomain()");
         String query = QUERY_INDIVIDUALS_NO_DOMAIN.replace(VARTAG, BeInCpps.SYSTEM_NS + BeInCpps.ownedBy)
                 .replace(VARTAG2, SesameRepoManager.getNamespace());
         return doGetIndividuals(query, null);
@@ -591,6 +621,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     @Override
     public List<IndividualItem> getIndividualsForDomain(String domain) throws RuntimeException {
+    	logger.info("Start getIndividualsForDomain(" + domain + ")");
         String query = QUERY_INDIVIDUALS_FOR_DOMAIN.replace(VARTAG, BeInCpps.SYSTEM_NS + BeInCpps.ownedBy)
                 .replace(VARTAG2, domain);
         return doGetIndividuals(query, null);
@@ -598,6 +629,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     @Override
     public List<IndividualItem> getIndividuals(String className) throws RuntimeException {
+    	logger.info("Start getIndividuals(" + className + ")");
         if (null == className || className.length() == 0) {
             throw new IllegalArgumentException("Class name is mandatory");
         }
@@ -608,16 +640,36 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     @Override
     public List<IndividualItem> getIndividualsBySubClasses(String className) throws RuntimeException {
+    	logger.info("Start getIndividualsBySubClasses(" + className + ")");
         if (null == className || className.length() == 0) {
             throw new IllegalArgumentException("Class name is mandatory");
         }
         className = Util.getGlobalName(getImplicitNamespace(), className);
         String qs = QUERY_INDIVIDUALS_BY_SUB_CLASSES.replace(VARTAG, className);
-        return doGetIndividuals(qs, null);
+        /*return doGetIndividuals(qs, null);*/
+        List<IndividualItem> resultTemp = doGetIndividuals(qs, className);
+        List<IndividualItem> result = new ArrayList<IndividualItem>(); 
+        		
+        /* remove namespace in result */
+        for (Iterator<IndividualItem> iterator = resultTemp.iterator(); iterator.hasNext();) {
+			IndividualItem curr = (IndividualItem) iterator.next();
+			
+			IndividualItem curr2 = new IndividualItem(
+					curr.getNamespace(), 
+					curr.getNormalizedName(), 
+					curr.getClassName().substring(curr.getClassName().indexOf("#") + 1, curr.getClassName().length()));
+			
+			result.add(curr2);
+		}
+        /* end remove */
+                
+        logger.info("End getIndividualsBySubClasses() with result\t" + result );
+        return result;
     }
 
     @Override
     public List<IndividualItem> getIndividualsByOrionConfig(String orionConfig) throws RuntimeException {
+    	logger.info("Start getIndividualsByOrionConfig(" + orionConfig + ")");
         if (StringUtils.isBlank(orionConfig))
             throw new IllegalArgumentException("OrionConfig id is mandatory");
         String qs = QUERY_INDIVIDUALS_BY_ORION_CONFIG.replace(VARTAG, BeInCpps.SYSTEM_NS + BeInCpps.syncTo)
@@ -628,6 +680,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     @Override
     public IndividualItem getIndividual(String name) throws RuntimeException {
+    	logger.info("Start getIndividual(" + name + ")");
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Individual name is mandatory");
         }
@@ -637,6 +690,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     @Override
     public IndividualItem getIndividualByNS(String name, String namespace) throws RuntimeException {
+    	logger.info("Start getIndividualByNS(" + name + ", " + namespace + ")");
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Individual name is mandatory");
         }
@@ -649,15 +703,18 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     @Override
     public List<PropertyValueItem> getIndividualAttributes(String name) throws RuntimeException {
-        return doGetIndividualAttributes(name, getImplicitNamespace());
+    	logger.info("Start getIndividualAttributes(" + name + ")");
+    	return doGetIndividualAttributes(name, getImplicitNamespace());
     }
 
     @Override
     public List<PropertyValueItem> getIndividualAttributesByNS(String name, String namespace) throws RuntimeException {
+    	logger.info("Start getIndividualAttributesByNS(" + name + ", " + namespace + ")");
         return doGetIndividualAttributes(name, namespace);
     }
 
     public List<PropertyValueItem> doGetIndividualAttributes(String name, String namespace) throws RuntimeException {
+    	logger.info("Start doGetIndividualAttributes(" + name + ", " + namespace + ")");
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Individual name is mandatory");
         }
@@ -685,6 +742,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     @Override
     public List<PropertyDeclarationItem> getAttributes() throws RuntimeException {
+    	logger.info("Start getAttributes()");
         List<PropertyDeclarationItem> items = new ArrayList<PropertyDeclarationItem>();
         String qs = QUERY_ALL_DATA_PROPS;
         List<BindingSet> results = executeSelect(qs);
@@ -739,7 +797,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         return domains;
     }
 
-    @Override
+	@Override
     public void createDomain(String name) throws IllegalArgumentException, RuntimeException {
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Domain name is mandatory");
@@ -787,9 +845,9 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         return items;
     }
 
-    @Override
+	@Override
     public void createUser(String id) throws IllegalArgumentException, RuntimeException {
-        String origUsername = id;
+        //String origUsername = id;
         if (null == id || id.length() == 0) {
             throw new IllegalArgumentException("User name is mandatory");
         }
@@ -870,7 +928,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         return names;
     }
 
-    @Override
+	@Override
     public void createOrionConfig(OrionConfig orionConfig) {
         if (null == orionConfig || null == orionConfig.getId() || orionConfig.getId().length() == 0) {
             throw new IllegalArgumentException("Orion Context Broker Id is mandatory");
@@ -916,7 +974,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         doDeleteIndividual(name, true);
     }
 
-    @Override
+	@Override
     public void createClass(String name, String parentName) throws IllegalArgumentException, RuntimeException {
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Class name is mandatory");
@@ -955,7 +1013,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         addStatements(statements);
     }
 
-    @Override
+	@Override
     public void moveClass(String name, String parentName) throws IllegalArgumentException, RuntimeException {
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Class name is mandatory");
@@ -1021,7 +1079,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         }
     }
 
-    @Override
+	@Override
     public void deleteClass(String name) throws IllegalArgumentException, IllegalStateException, RuntimeException {
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Class name is mandatory");
@@ -1045,8 +1103,9 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         removeAllStatements(classUri, null, null);
     }
 
-    @Override
+	@Override
     public void renameClass(String oldName, String newName) throws IllegalArgumentException, RuntimeException {
+    	logger.info("Start renameClass(" + oldName + ", " + newName + ")");
         if (null == oldName || oldName.length() == 0 || null == newName || newName.length() == 0) {
             throw new IllegalArgumentException("Class name is mandatory");
         }
@@ -1112,9 +1171,10 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         }
     }
 
-    @Override
+	@Override
     public void createAssetModel(String name, String className, String domainName)
             throws IllegalArgumentException, RuntimeException {
+    	logger.info("Start createAssetModel(" + name + ", " + className + ", " + domainName + ")");
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Asset name is mandatory");
         }
@@ -1175,12 +1235,14 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
 
     @Override
     public void deleteIndividual(String name) throws IllegalArgumentException, IllegalStateException, RuntimeException {
+    	logger.info("Start deleteIndividual(" + name + ")");
         doDeleteIndividual(name, false);
     }
 
-    @Override
+	@Override
     public void createAsset(String name, String modelName, String domainName)
             throws IllegalArgumentException, RuntimeException {
+    	logger.info("Start createAsset(" + name + ", " + modelName + ", " + domainName + ")");
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Asset name is mandatory");
         }
@@ -1269,35 +1331,42 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
     @Override
     public void setAttribute(String name, String individualName, String value)
             throws IllegalArgumentException, RuntimeException {
+    	logger.info("Start setAttribute(" + name + ", " + individualName + ", " + value + ")");
         setAttribute(name, individualName, value, null);
     }
 
     @Override
     public void setAttribute(String name, String individualName, String value, Class<?> type)
             throws IllegalArgumentException, RuntimeException {
-        setProperty(name, individualName, value, type, true);
+    	logger.info("Start setAttribute(" + name + ", " + individualName + ", " + value + ", " + value +")");
+    	setProperty(name, individualName, value, type, true);
     }
 
     @Override
     public void setAttribute(String name, String individualName, String value, Class<?> type, String namespace)
             throws IllegalArgumentException, RuntimeException {
-        setProperty(name, individualName, value, type, true, namespace);
+    	logger.info("Start setAttribute(" + name + ", " + individualName + ", " + value + ", " + value +", " 
+            + namespace +")");
+    	setProperty(name, individualName, value, type, true, namespace);
     }
 
     @Override
     public void setRelationship(String name, String individualName, String referredName)
             throws IllegalArgumentException, RuntimeException {
+    	logger.info("Start setRelationship(" + name + ", " + individualName + ", " + referredName + ")");
         setProperty(name, individualName, referredName, null, false);
     }
 
     @Override
     public void removeProperty(String name, String individualName) throws IllegalArgumentException, RuntimeException {
+    	logger.info("Start removeProperty(" + name + ", " + individualName + ")");
         removeProperty(null, name, individualName);
     }
 
-    @Override
+	@Override
     public void removeProperty(String namespace, String name, String individualName) throws IllegalArgumentException, RuntimeException {
-        if (StringUtils.isBlank(namespace))
+    	logger.info("Start removeProperty(" + namespace + ", " + name + ", " + individualName + ")");
+    	if (StringUtils.isBlank(namespace))
             namespace = getImplicitNamespace();
 
         if (null == name || name.length() == 0) {
@@ -1406,7 +1475,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         return new IndividualItem(getImplicitNamespace(), name, clazz);
     }
 
-    private void doDeleteIndividual(String name, boolean system)
+	private void doDeleteIndividual(String name, boolean system)
             throws IllegalArgumentException, IllegalStateException, RuntimeException {
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Individual name is mandatory");
@@ -1581,7 +1650,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         setProperty(name, individualName, value, type, dataProp, null);
     }
 
-    private void setProperty(String name, String individualName, String value, Class<?> type, boolean dataProp, String namespace)
+	private void setProperty(String name, String individualName, String value, Class<?> type, boolean dataProp, String namespace)
             throws IllegalArgumentException, RuntimeException {
         if (null == name || name.length() == 0) {
             throw new IllegalArgumentException("Property name is mandatory");
@@ -1777,7 +1846,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         }
     }
 
-    private void removeAllStatements(Resource subject, URI predicate, Value object) {
+	private void removeAllStatements(Resource subject, URI predicate, Value object) {
         RepositoryConnection con = null;
         try {
             con = getConnection();
@@ -1811,7 +1880,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
         }
     }
 
-    private URI getRangeFromType(Class<?> type) {
+	private URI getRangeFromType(Class<?> type) {
         if (String.class == type) {
             return XMLSchema.STRING;
         } else if (Integer.class == type) {
@@ -1838,7 +1907,7 @@ public class Sesame2RepositoryDAO implements RepositoryDAO {
     /**
      * Only for internal testing, don't use!
      */
-    public void runTest01() {
+	public void runTest01() {
         RepositoryConnection con = null;
         URI name = vf.createURI("http://www.msee-ip.eu/bao#Bivolino-WeavingMachine");
         try {
