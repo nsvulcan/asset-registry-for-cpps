@@ -23,7 +23,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CAMRestImpl {
-    private static final Logger logger = LogManager.getLogger(CAMRestImpl.class.getName());
+    
+	private static final Logger logger = LogManager.getLogger(CAMRestImpl.class.getName());
     public static final String PREFIX = "http://www.w3.org/2002/07/owl#";
 
     public static ClassItem getClassHierarchy(RepositoryDAO dao) {
@@ -33,7 +34,7 @@ public class CAMRestImpl {
     public static List<ClassItem> getClasses(RepositoryDAO dao, boolean checkNormalizedName, boolean flat) {
         ClassItem root = getClassHierarchy(dao);
         List<ClassItem> subClasses = root.getSubClasses();
-        if (!checkNormalizedName)
+		if (!checkNormalizedName)
             return subClasses;
         for (ClassItem classItem : subClasses) {
             if (classItem.getNormalizedName().contains("#")) {
@@ -49,7 +50,8 @@ public class CAMRestImpl {
             List<ClassItem> results = new ArrayList<>();
             Map<String, Boolean> visited = new HashMap<>(); // null
             deepSearchFirstRecursive(dao, visited, root, results, false);
-            return results.stream()
+            
+			return results.stream()
                     .filter(item -> (item.getNamespace()).equalsIgnoreCase(SesameRepoManager.getNamespace()))
                     .collect(Collectors.toList());
         }
@@ -108,7 +110,12 @@ public class CAMRestImpl {
     }
 
     public static List<PropertyValueItem> getIndividualAttributes(RepositoryDAO dao, String assetName) {
-        return dao.getIndividualAttributes(assetName);
+    	int endIndex = assetName.indexOf("#");
+    	if(assetName.indexOf("#") > 0 ) {
+    		return dao.getIndividualAttributesByNS(assetName.substring(0, endIndex), assetName.substring(endIndex));
+    	} else {
+    		return dao.getIndividualAttributes(assetName);
+    	}
     }
 
     public static void createAssetModel(RepositoryDAO dao, String name, String className, String domainName) {
@@ -224,8 +231,8 @@ public class CAMRestImpl {
     public static List<PropertyDeclarationItem> getAttributes(RepositoryDAO dao) {
         List<PropertyDeclarationItem> attributes = dao.getAttributes();
         List<PropertyDeclarationItem> collectedAttributes = attributes.stream()
-                .filter(attr -> (attr.getNamespace().equalsIgnoreCase(SesameRepoManager.getNamespace())
-                        && !isURI(attr.getNormalizedName())))
+                //.filter(attr -> (attr.getNamespace().equalsIgnoreCase(SesameRepoManager.getNamespace())
+                      //  && !isURI(attr.getNormalizedName())))
                 .collect(Collectors.toList());
         return collectedAttributes;
     }
