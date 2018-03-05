@@ -45,12 +45,23 @@ public class IndividualItem extends Tuple {
 	public String getClassName() {
 		return getNormalizedValue();
 	}
-	
+
 	@Override
+	public String toString() {
+		return "IndividualItem [getIndividualName()=" + getIndividualName() + ", getClassName()=" + getClassName()
+				+ ", getNamespace()=" + getNamespace() + ", getOriginalName()=" + getOriginalName()
+				+ ", getNormalizedName()=" + getNormalizedName() + ", getOriginalValue()=" + getOriginalValue()
+				+ ", getNormalizedValue()=" + getNormalizedValue() + "]";
+	}
+	
+	/*@Override
 	public String toString() {
 		StringBuilder buf = new StringBuilder();
 		buf.append("ASSET_OBJECT[Name=").append(getIndividualName());
 		buf.append("; Class=").append(getClassName()).append("]");
 		return buf.toString();
-	}
+	}*/
+	
+	
+	
 }
